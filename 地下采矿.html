@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地下采矿技术 | 深入地球的工程奇迹</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #15202b;
+            --primary: #1d2d3e;
+            --secondary: #2a3b52;
+            --accent: #e0f7ff;
+            --highlight: #ff9800;
+            --rock-dark: #5a5c6b;
+            --rock-light: #8d99ae;
+            --mineral-blue: #00b4d8;
+            --support: #bc6c25;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: rgba(21, 32, 43, 0.98);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.8rem;
+            color: var(--highlight);
+            animation: pulse 2s infinite;
+        }
+
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.15rem;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--highlight);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* 英雄区域 */
+        .underground-hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .underground-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.7)),
+                linear-gradient(rgba(21, 32, 43, 0.85), rgba(21, 32, 43, 0.95)),
+                url('https://images.unsplash.com/photo-1543659895-29fbcb1dba15?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding-right: 100px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.4);
+        }
+
+        .hero-content p {
+            font-size: 1.45rem;
+            margin-bottom: 40px;
+            color: #d0ebff;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--highlight);
+            color: var(--primary-dark);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3);
+        }
+
+        .btn:hover {
+            background: #ffad33;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--highlight);
+            color: var(--accent);
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.2);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 152, 0, 0.15);
+            color: #ffad33;
+            transform: translateY(-5px);
+        }
+
+        /* 内容区域 */
+        .section {
+            padding: 110px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 90px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: var(--highlight);
+            border-radius: 3px;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 35px auto 0;
+            color: #b0cfe9;
+        }
+
+        /* 地下采矿方法 */
+        .mining-methods {
+            background: linear-gradient(to bottom, rgba(29, 45, 62, 0.9), rgba(21, 32, 43, 0.9));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 45px;
+            margin-top: 50px;
+        }
+
+        .method-card {
+            background: rgba(42, 59, 82, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .method-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 152, 0, 0.3);
+        }
+
+        .method-header {
+            padding: 25px 30px;
+            background: rgba(26, 36, 51, 0.7);
+            border-bottom: 2px solid var(--support);
+        }
+
+        .method-card h3 {
+            font-size: 1.8rem;
+            color: var(--highlight);
+        }
+
+        .method-icon {
+            font-size: 2.8rem;
+            color: var(--highlight);
+            margin-bottom: 15px;
+        }
+
+        .method-content {
+            padding: 30px;
+        }
+
+        .method-content p {
+            color: #c0d6f0;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .method-features {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .method-features li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .method-features li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--highlight);
+            font-size: 1.5rem;
+        }
+
+        /* 技术与设备 */
+        .technology-section {
+            background: linear-gradient(to bottom, rgba(21, 32, 43, 0.9), rgba(16, 26, 36, 0.9));
+            position: relative;
+        }
+
+        .technology-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1524678606370-a47ad25cb82a?ixlib=rb-4.0.3') no-repeat center center/cover;
+            opacity: 0.06;
+            z-index: -1;
+        }
+
+        .tech-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .tech-card {
+            background: rgba(42, 59, 82, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(255, 152, 0, 0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+            border-color: var(--highlight);
+        }
+
+        .tech-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(255, 152, 0, 0.4);
+        }
+
+        .tech-icon {
+            font-size: 3.2rem;
+            color: var(--mineral-blue);
+            margin-right: 20px;
+        }
+
+        .tech-card h3 {
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+
+        .tech-features {
+            margin: 25px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            margin-bottom: 20px;
+            background: rgba(26, 36, 51, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            color: var(--highlight);
+            min-width: 50px;
+            margin-right: 15px;
+        }
+
+        .feature-content h4 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--mineral-blue);
+        }
+
+        .feature-content p {
+            color: #b0cfe9;
+            line-height: 1.6;
+        }
+
+        /* 安全与通风 */
+        .safety-section {
+            background: linear-gradient(135deg, #1c2d3f, #1a283a);
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .safety-card {
+            background: rgba(42, 59, 82, 0.8);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .safety-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        .safety-icon {
+            font-size: 4rem;
+            color: var(--highlight);
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .safety-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .safety-card p {
+            color: #c0d6f0;
+            line-height: 1.8;
+        }
+
+        .safety-progress {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(21, 32, 43, 0.6);
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .safety-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .safety-bar {
+            height: 10px;
+            background: var(--rock-dark);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .safety-progress-bar {
+            height: 100%;
+            background: var(--highlight);
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+
+        /* 页脚 */
+        footer {
+            background: rgba(13, 20, 30, 0.95);
+            padding: 90px 0 40px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--highlight), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--highlight);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #8da1ba;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--highlight);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            font-size: 1.4rem;
+            color: var(--mineral-blue);
+            min-width: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+        }
+
+        .social-links a:hover {
+            background: var(--highlight);
+            color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #7e93b0;
+            font-size: 0.95rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1100px) {
+            .hero-content {
+                padding-right: 50px;
+            }
+
+            .hero-content h1 {
+                font-size: 3.8rem;
+            }
+
+            .tech-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .hero-content {
+                padding-right: 0;
+                text-align: center;
+                max-width: 100%;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-hard-hat logo-icon"></i>
+                <h1>地下采矿技术</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="javascript:void(0)" class="active">地矿前沿</a></li>
+                    <li><a href="javascript:void(0)">采矿方法</a></li>
+                    <li><a href="javascript:void(0)">支护技术</a></li>
+                    <li><a href="javascript:void(0)">安全系统</a></li>
+                    <li><a href="javascript:void(0)">智能采矿</a></li>
+                    <li><a href="javascript:void(0)">案例研究</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="underground-hero">
+        <div class="container hero-content">
+            <h1>深入地球核心：地下采矿的艺术</h1>
+            <p>地下采矿是人类工程学的奇迹，在最严苛的地质条件下探索、设计和建设可持续资源获取方案。从浅层煤矿到深达4000米的金矿，现代科技让人类能够安全深入地壳获取宝贵资源。</p>
+            <div class="hero-buttons">
+                <a href="#methods" class="btn"><i class="fas fa-tunnel"></i> 探索采矿方法</a>
+                <a href="#safety" class="btn-outline"><i class="fas fa-user-helmet-safety"></i> 了解安全系统</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 地下采矿方法 -->
+    <section class="section mining-methods" id="methods">
+        <div class="container">
+            <div class="section-title">
+                <h2>地下采矿方法</h2>
+                <p>适应不同矿体形态的多元化开采技术</p>
+            </div>
+
+            <div class="methods-grid">
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-mine-shaft"></i>
+                        </div>
+                        <h3>房柱法采矿</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>适用于近水平、中厚矿体开采，通过保留规则矿柱支撑顶板，在矿柱间开拓矿房进行回采。</p>
+
+                        <div class="method-features">
+                            <ul>
+                                <li>矿体倾角小于30度</li>
+                                <li>顶板稳固的中厚矿体</li>
+                                <li>回收率50-65%</li>
+                                <li>矿柱尺寸：8m×8m至15m×15m</li>
+                                <li>最大开采深度：800米</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <h3>分层充填法</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>适用于急倾斜厚矿体开采，将矿体划分为分层，自下而上分层回采并填充采空区。</p>
+
+                        <div class="method-features">
+                            <ul>
+                                <li>矿体倾角大于45度</li>
+                                <li>矿石价值高、稳固性好</li>
+                                <li>回收率85-95%</li>
+                                <li>采高2.5-4.0米</li>
+                                <li>最深应用：2500米</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <div class="method-header">
+                        <div class="method-icon">
+                            <i class="fas fa-screw"></i>
+                        </div>
+                        <h3>崩落法采矿</h3>
+                    </div>
+                    <div class="method-content">
+                        <p>通过底部出矿引起上部矿石自然崩落，适用于大型规则矿体，具备高效低成本的优势。</p>
+
+                        <div class="method-features">
+                            <ul>
+                                <li>矿体厚度大于30米</li>
+                                <li>矿石中等稳固至不稳固</li>
+                                <li>回收率80-90%</li>
+                                <li>采区尺寸：50×50至200×200米</li>
+                                <li>全球最深的崩落法矿山：2500米</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术与设备 -->
+    <section class="section technology-section" id="tech">
+        <div class="container">
+            <div class="section-title">
+                <h2>前沿技术与设备</h2>
+                <p>数字赋能下的人工智能与自动化系统</p>
+            </div>
+
+            <div class="tech-container">
+                <div class="tech-card">
+                    <div class="tech-header">
+                        <div class="tech-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>自动化设备</h3>
+                    </div>
+                    <p>地下矿山智能设备的发展大幅提升了作业安全性和生产效率。自动化系统使得重型机械可在危险区域远程操作或自主运行。</p>
+
+                    <div class="tech-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-truck-loading"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>无人矿卡系统</h4>
+                                <p>LHD运矿车实现无人驾驶和自动装运，配备激光雷达和多重传感器保障运行安全，每班次产能提升35%。</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bore-hole"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>智能钻机</h4>
+                                <p>配备GPS定位和自动导航系统的凿岩台车，可实现精确爆破孔定位，误差小于10cm，钻孔效率提升40%。</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-wave-square"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>微震监测系统</h4>
+                                <p>部署于采场的关键传感器网络，实时监测岩体应力变化，预测岩爆风险，提前预警准确率高达92%。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-header">
+                        <div class="tech-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h3>数字矿山系统</h3>
+                    </div>
+                    <p>基于工业物联网的数字孪生系统集成采矿全流程数据，实现矿山运营的可视化、可预测和智能化管理。</p>
+
+                    <div class="tech-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>三维数字建模</h4>
+                                <p>采用地质雷达与无人机扫描构建厘米级精度矿体模型，实现储量精确计算和开采方案优化设计。</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>智能通风调控</h4>
+                                <p>根据作业区域分布和矿车位置自动调节风门开度，节能达40%的同时确保粉尘浓度符合健康标准。</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>人员定位系统</h4>
+                                <p>基于UWB技术的精确实时定位网络，定位精度达30cm，紧急状况下可精确锁定每一位矿工位置。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 安全与通风 -->
+    <section class="section safety-section" id="safety">
+        <div class="container">
+            <div class="section-title">
+                <h2>安全与通风系统</h2>
+                <p>构建地下矿山安全防护的生命线</p>
+            </div>
+
+            <div class="safety-grid">
+                <div class="safety-card">
+                    <div class="safety-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3>矿井通风</h3>
+                    <p>复杂巷道网络下的智能通风系统，提供新鲜空气、排出有害气体和控制微气候环境。</p>
+
+                    <div class="safety-progress">
+                        <div class="safety-stats">
+                            <span>通风能力</span>
+                            <span>98%</span>
+                        </div>
+                        <div class="safety-bar">
+                            <div class="safety-progress-bar" style="width: 98%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="safety-card">
+                    <div class="safety-icon">
+                        <i class="fas fa-tower-observation"></i>
+                    </div>
+                    <h3>岩爆防控</h3>
+                    <p>高应力矿山的岩爆防治体系，包括微震监测、应力解除钻孔和柔性支护技术。</p>
+
+                    <div class="safety-progress">
+                        <div class="safety-stats">
+                            <span>灾害预测率</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="safety-bar">
+                            <div class="safety-progress-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="safety-card">
+                    <div class="safety-icon">
+                        <i class="fas fa-fire-extinguisher"></i>
+                    </div>
+                    <h3>紧急避险系统</h3>
+                    <p>地下紧急避难硐室与个人防护装备，可在灾害发生时提供96小时生存保障。</p>
+
+                    <div class="safety-progress">
+                        <div class="safety-stats">
+                            <span>逃生成功率</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="safety-bar">
+                            <div class="safety-progress-bar" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>地下采矿技术</h3>
+                    <p>致力于推动地下采矿技术创新，提升安全水平和生产效率，构建资源开采与环境和谐的可持续未来。</p>
+                    <div class="social-links">
+                        <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>专业资源</h3>
+                    <a href="javascript:void(0)">采矿方法指南</a>
+                    <a href="javascript:void(0)">支护技术手册</a>
+                    <a href="javascript:void(0)">通风系统设计</a>
+                    <a href="javascript:void(0)">安全规程库</a>
+                    <a href="javascript:void(0)">设备数据库</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>全球深地项目</h3>
+                    <a href="javascript:void(0)">南非姆波能金矿 - 4000m</a>
+                    <a href="javascript:void(0)">加拿大基德矿 - 3200m</a>
+                    <a href="javascript:void(0)">中国胶东金矿 - 1500m</a>
+                    <a href="javascript:void(0)">智利丘基卡马塔铜矿 - 1200m</a>
+                    <a href="javascript:void(0)">澳大利亚Fosterville金矿 - 1000m</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>北京市海淀区学院路30号矿业科技大厦</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+86 10 1234 5678</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@underground-mining.org</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-people-group"></i>
+                        <span>地下采矿技术创新联盟</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 地下采矿技术平台. 保留所有权利 | 京ICP备2023000000号</p>
+                <p style="margin-top: 15px">深地资源开发国家重点实验室</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.method-card, .tech-card, .safety-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedItems.forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(item);
+            });
+
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(21, 32, 43, 0.98)';
+                    header.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
+                } else {
+                    header.style.background = 'rgba(21, 32, 43, 0.98)';
+                    header.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)';
+                }
+            });
+
+            // 进度条动画
+            setTimeout(() => {
+                document.querySelectorAll('.safety-progress-bar').forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 300);
+                });
+            }, 800);
+        });
+    </script>
+</body>
+</html>

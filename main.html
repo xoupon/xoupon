@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>采矿工程认知与介绍平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0d1b2a;
+            --primary: #1b263b;
+            --secondary: #415a77;
+            --accent: #e0e1dd;
+            --highlight: #ff9e00;
+            --metal: #6c757d;
+            --earth: #8d6e63;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: rgba(13, 27, 42, 0.95);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--highlight);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            /*background-clip: text;*/
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* 英雄区域 */
+        .hero {
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1549399542-7e845f098b91?ixlib=rb-4.0.3') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: #e0e1dd;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--highlight);
+            color: var(--primary-dark);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #ffb133;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 内容区域 */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            /*background-clip: text;*/
+            color: transparent;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--highlight);
+            border-radius: 2px;
+        }
+
+        /* 卡片布局 */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon {
+            background: var(--secondary);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--highlight);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .card p {
+            color: #cbd5e0;
+            margin-bottom: 20px;
+        }
+
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--secondary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            animation: fadeIn 1s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-content h3 {
+            color: var(--highlight);
+            margin-bottom: 10px;
+        }
+
+        .timeline-content p {
+            color: #cbd5e0;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: var(--highlight);
+            border: 4px solid var(--secondary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -13px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -13px;
+        }
+
+        /* 统计区域 */
+        .stats {
+            background: rgba(27, 38, 59, 0.6);
+            padding: 70px 0;
+            text-align: center;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .stat-item {
+            min-width: 200px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--highlight);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        /* 职业路径部分 */
+        .career-paths {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .career-card {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .career-card:hover {
+            border-color: var(--highlight);
+            transform: scale(1.03);
+        }
+
+        .career-card i {
+            font-size: 3rem;
+            color: var(--highlight);
+            margin-bottom: 20px;
+        }
+
+        .career-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .career-card ul {
+            text-align: left;
+            padding-left: 20px;
+            color: #cbd5e0;
+        }
+
+        .career-card li {
+            margin-bottom: 10px;
+        }
+
+        /* 图表部分 */
+        .chart-container {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-header h3 {
+            font-size: 1.6rem;
+            color: var(--highlight);
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .chart-wrapper {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .chart-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        /* 页脚 */
+        footer {
+            background: rgba(13, 27, 42, 0.95);
+            padding: 60px 0 30px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--highlight);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #a0aec0;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--highlight);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--highlight);
+            color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.8rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 18px;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .hero h2 {
+                font-size: 2.3rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .chart-container {
+                padding: 15px;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* 识别系统区域 */
+        .identification-section {
+            background: rgba(27, 38, 59, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 80px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .identify-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .upload-area {
+            width: 100%;
+            max-width: 500px;
+            height: 280px;
+            border: 3px dashed var(--secondary);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-area.active {
+            border-color: var(--highlight);
+            background: rgba(65, 90, 119, 0.2);
+        }
+
+        .upload-area i {
+            font-size: 4rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover i, .upload-area.active i {
+            color: var(--highlight);
+            transform: scale(1.1);
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            color: var(--accent);
+            text-align: center;
+            max-width: 80%;
+        }
+
+        .upload-btn {
+            margin-top: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: var(--highlight);
+            color: var(--primary-dark);
+        }
+
+        #imagePreview {
+            display: none;
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 2px solid var(--secondary);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .result-container {
+            width: 100%;
+            min-height: 150px;
+            background: rgba(13, 27, 42, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 1.4rem;
+            color: var(--highlight);
+            margin-bottom: 15px;
+        }
+
+        .result-content {
+            background: rgba(27, 38, 59, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-category {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .result-confidence {
+            color: var(--highlight);
+            font-weight: 700;
+        }
+
+        /* 加载动画 */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--highlight);
+            animation: spin 1s ease-in-out infinite;
+            margin: 20px auto;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .identification-section {
+                padding: 25px;
+            }
+
+            .upload-area {
+                height: 220px;
+            }
+
+            .upload-area i {
+                font-size: 3rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-mountain logo-icon"></i>
+                <h1>采矿工程认知平台</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="javascript:void(0)" class="active">首页</a></li>
+                    <li><a href="javascript:void(0)">采矿概述</a></li>
+                    <li><a href="javascript:void(0)">技术方法</a></li>
+                    <li><a href="javascript:void(0)">数据对比</a></li>
+                    <li><a href="javascript:void(0)">安全环保</a></li>
+                    <li><a href="javascript:void(0)">职业发展</a></li>
+                    <li><a href="javascript:void(0)">资源中心</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>探索采矿工程的科学与艺术</h2>
+            <p>采矿工程是连接人类文明与地球资源的桥梁，涉及地质学、工程学、环境科学等多学科领域，致力于安全、高效、可持续地开发矿产资源。</p>
+            <a href="#data-analysis" class="btn">查看数据对比 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- 概述部分 -->
+    <section class="section" id="overview">
+        <div class="container">
+            <div class="section-title">
+                <h2>采矿工程概述</h2>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>什么是采矿工程？</h3>
+                        <p>采矿工程是一门应用科学，涉及从地球中提取有价值矿物的技术、方法和工艺。它涵盖了从勘探、开采到矿物加工的全过程。</p>
+                        <a href="./采矿工程简介.html" class="btn">了解更多</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>历史发展</h3>
+                        <p>采矿活动可以追溯到史前时代，从简单的石器开采到现代高科技采矿，经历了数千年的技术革新与发展。</p>
+                        <a href="./采矿历史发展.html" class="btn">了解更多</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>全球重要性</h3>
+                        <p>采矿为现代工业提供必需的原材料，支撑着建筑、制造、能源、电子等众多行业的发展，是国家经济的重要支柱。</p>
+                        <a href="./采矿全球重要性.html" class="btn">了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 时间线部分 -->
+    <section class="section" style="background: rgba(13, 27, 42, 0.7);">
+        <div class="container">
+            <div class="section-title">
+                <h2>采矿技术发展历程</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>史前时代</h3>
+                        <p>人类开始使用燧石、黑曜石等矿物制作工具，最早的露天采矿活动出现。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>青铜时代</h3>
+                        <p>铜和锡的开采与冶炼技术发展，推动了人类文明的进步。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>工业革命</h3>
+                        <p>蒸汽机应用于矿井排水和提升，炸药的使用极大提高了开采效率。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>20世纪</h3>
+                        <p>机械化采矿设备普及，安全标准提高，大型露天矿和深井矿出现。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>21世纪</h3>
+                        <p>自动化、数字化、智能化成为趋势，绿色采矿和可持续发展成为核心理念。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计部分 -->
+    <section class="stats">
+        <div class="container stats-container">
+            <div class="stat-item">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">全球制造业依赖矿产资源</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$1.2万亿</div>
+                <div class="stat-label">全球矿业年产值</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">300万+</div>
+                <div class="stat-label">全球采矿从业人员</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">40%</div>
+                <div class="stat-label">矿业技术十年内进步率</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 采矿方法部分 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>主要采矿方法</h2>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-hill-rockslide"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>露天开采</h3>
+                        <p>适用于矿体接近地表的情况，通过剥离覆盖层直接开采矿物。具有生产效率高、成本低的优点。</p>
+                        <a href="./露天采矿.html" class="btn">查看详情</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-tunnel"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>地下开采</h3>
+                        <p>通过竖井、斜井或平硐进入矿体进行开采，适用于深部矿床。技术复杂但环境影响较小。</p>
+                        <a href="./地下采矿.html" class="btn">查看详情</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-oil-well"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>溶液采矿</h3>
+                        <p>通过注入化学溶液溶解矿物，再将溶液抽至地表提取。适用于可溶性矿物如钾盐、铀矿等。</p>
+                        <a href="./溶液采矿.html" class="btn">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据对比部分 -->
+    <section class="section" id="data-analysis" style="background: rgba(13, 27, 42, 0.7);">
+        <div class="container">
+            <div class="section-title">
+                <h2>采矿数据对比分析</h2>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>主要采矿方法对比分析</h3>
+                    <div class="btn">下载数据 <i class="fas fa-download"></i></div>
+                </div>
+                <canvas id="miningMethodsChart"></canvas>
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-wrapper">
+                    <div class="chart-title">全球矿产分布情况（2023年）</div>
+                    <canvas id="mineralsDistributionChart"></canvas>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #ff9e00;"></div>
+                            <span>铁矿石</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #4e79a7;"></div>
+                            <span>铜矿</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #f28e2c;"></div>
+                            <span>金矿</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #76b7b2;"></div>
+                            <span>煤矿</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-wrapper">
+                    <div class="chart-title">采矿成本构成分析</div>
+                    <canvas id="costBreakdownChart"></canvas>
+                </div>
+
+                <div class="chart-wrapper">
+                    <div class="chart-title">矿产价格趋势（美元/吨）</div>
+                    <canvas id="priceTrendChart"></canvas>
+                </div>
+
+                <div class="chart-wrapper">
+                    <div class="chart-title">采矿安全指标对比</div>
+                    <canvas id="safetyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 职业发展部分 -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>采矿工程职业路径</h2>
+            </div>
+            <div class="career-paths">
+                <div class="career-card">
+                    <i class="fas fa-hard-hat"></i>
+                    <h3>采矿工程师</h3>
+                    <p>设计矿山开采方案，优化生产流程，确保安全高效开采。</p>
+                    <ul>
+                        <li>矿山设计与规划</li>
+                        <li>生产流程优化</li>
+                        <li>设备选型与管理</li>
+                    </ul>
+                </div>
+
+                <div class="career-card">
+                    <i class="fas fa-drafting-compass"></i>
+                    <h3>矿山规划师</h3>
+                    <p>进行矿山长期规划，确定开采顺序和资源利用策略。</p>
+                    <ul>
+                        <li>资源评估与建模</li>
+                        <li>开采计划制定</li>
+                        <li>经济性分析</li>
+                    </ul>
+                </div>
+
+                <div class="career-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>矿山环保专家</h3>
+                    <p>负责矿山环境管理，实施生态恢复和污染防控措施。</p>
+                    <ul>
+                        <li>环境影响评估</li>
+                        <li>复垦方案设计</li>
+                        <li>环境监测与管理</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="identification-section">
+                <div class="section-title">
+                    <h2>采矿图像识别系统</h2>
+                </div>
+
+                <div class="identify-container">
+                    <div id="uploadArea" class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <div class="upload-text">
+                            上传现场照片识别采矿设备与场景<br>
+                            支持JPG、PNG格式，最大10MB
+                        </div>
+                        <div class="upload-btn">选择图片</div>
+                        <img id="imagePreview" alt="预览图像">
+                        <input type="file" id="fileInput" accept="image/*">
+                    </div>
+
+                    <div class="controls">
+                        <button id="identifyBtn" class="btn" disabled>
+                            <i class="fas fa-search"></i> 识别图像
+                        </button>
+                        <button id="resetBtn" class="btn" style="background: var(--metal)">
+                            <i class="fas fa-redo"></i> 重置
+                        </button>
+                    </div>
+
+                    <div class="spinner" id="spinner"></div>
+
+                    <div class="result-container" id="resultContainer">
+                        <h3 class="result-title">识别结果</h3>
+                        <p>识别类别: <strong id="resultCategory">等待识别...</strong></p>
+
+                        <div class="result-content">
+                            <div class="result-item">
+                                <span class="result-category">挖掘设备</span>
+                                <span class="result-confidence">95%</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-category">运输设备</span>
+                                <span class="result-confidence">82%</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-category">钻探设备</span>
+                                <span class="result-confidence">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>关于平台</h3>
+                    <p>采矿工程认知与介绍平台致力于提供全面、准确的采矿工程知识，促进公众对采矿行业的理解和认识。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <a href="#">首页</a>
+                    <a href="#">采矿概述</a>
+                    <a href="#">技术方法</a>
+                    <a href="#">数据对比</a>
+                    <a href="#">职业发展</a>
+                    <a href="#">资源中心</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>学习资源</h3>
+                    <a href="#">采矿技术手册</a>
+                    <a href="#">行业报告</a>
+                    <a href="#">视频教程</a>
+                    <a href="#">学术期刊</a>
+                    <a href="#">专业课程</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 北京市海淀区学院路30号</p>
+                    <p><i class="fas fa-phone"></i> +86 10 6233 4455</p>
+                    <p><i class="fas fa-envelope"></i> info@mining-edu.org</p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 采矿工程认知平台. 保留所有权利 | 京ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(13, 27, 42, 0.98)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                } else {
+                    header.style.background = 'rgba(13, 27, 42, 0.95)';
+                    header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+                }
+            });
+
+            // 卡片动画效果
+            const cards = document.querySelectorAll('.card');
+            const careerCards = document.querySelectorAll('.career-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+
+            careerCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'scale(0.95)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            // 时间线动画
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.style.opacity = 0;
+                observer.observe(item);
+            });
+        });
+
+        // 初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 采矿方法对比图
+            const methodsCtx = document.getElementById('miningMethodsChart').getContext('2d');
+            const methodsChart = new Chart(methodsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['露天开采', '地下开采', '溶液开采'],
+                    datasets: [{
+                        label: '生产效率（吨/人·天）',
+                        data: [45, 18, 32],
+                        backgroundColor: '#ff9e00',
+                        borderColor: '#ff9e00',
+                        borderWidth: 1
+                    }, {
+                        label: '初始投资（百万美元）',
+                        data: [120, 200, 85],
+                        backgroundColor: '#415a77',
+                        borderColor: '#415a77',
+                        borderWidth: 1
+                    }, {
+                        label: '安全指数（1-10）',
+                        data: [8.2, 6.5, 9.1],
+                        backgroundColor: '#76b7b2',
+                        borderColor: '#76b7b2',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#e0e1dd'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#e0e1dd'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e0e1dd'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 全球矿产分布图
+            const mineralsCtx = document.getElementById('mineralsDistributionChart').getContext('2d');
+            const mineralsChart = new Chart(mineralsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['中国', '澳大利亚', '巴西', '俄罗斯', '美国', '其他'],
+                    datasets: [{
+                        data: [22, 18, 15, 12, 10, 23],
+                        backgroundColor: [
+                            '#ff9e00',
+                            '#4e79a7',
+                            '#f28e2c',
+                            '#76b7b2',
+                            '#59a14f',
+                            '#edc949'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // 成本构成图
+            const costCtx = document.getElementById('costBreakdownChart').getContext('2d');
+            const costChart = new Chart(costCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['劳动力成本', '设备维护', '能源消耗', '爆破材料', '环境保护', '运输成本'],
+                    datasets: [{
+                        data: [28, 22, 18, 12, 10, 10],
+                        backgroundColor: [
+                            '#ff9e00',
+                            '#4e79a7',
+                            '#f28e2c',
+                            '#76b7b2',
+                            '#59a14f',
+                            '#edc949'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#e0e1dd',
+                                padding: 15
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 价格趋势图
+            const priceCtx = document.getElementById('priceTrendChart').getContext('2d');
+            const priceChart = new Chart(priceCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+                    datasets: [{
+                        label: '铁矿石',
+                        data: [65, 92, 110, 150, 120, 105],
+                        borderColor: '#ff9e00',
+                        backgroundColor: 'rgba(255, 158, 0, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: '铜',
+                        data: [6200, 6000, 6800, 9300, 8800, 8200],
+                        borderColor: '#4e79a7',
+                        backgroundColor: 'rgba(78, 121, 167, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }, {
+                        label: '金',
+                        data: [1270, 1400, 1770, 1800, 1700, 1850],
+                        borderColor: '#f28e2c',
+                        backgroundColor: 'rgba(242, 142, 44, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#e0e1dd'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#e0e1dd'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e0e1dd'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 安全指标图
+            const safetyCtx = document.getElementById('safetyChart').getContext('2d');
+            const safetyChart = new Chart(safetyCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['安全培训', '防护设备', '监测系统', '应急响应', '事故率', '安全文化'],
+                    datasets: [{
+                        label: '露天开采',
+                        data: [85, 90, 80, 75, 88, 82],
+                        backgroundColor: 'rgba(255, 158, 0, 0.2)',
+                        borderColor: '#ff9e00',
+                        pointBackgroundColor: '#ff9e00'
+                    }, {
+                        label: '地下开采',
+                        data: [75, 85, 70, 80, 65, 78],
+                        backgroundColor: 'rgba(78, 121, 167, 0.2)',
+                        borderColor: '#4e79a7',
+                        pointBackgroundColor: '#4e79a7'
+                    }, {
+                        label: '行业标准',
+                        data: [80, 80, 80, 80, 80, 80],
+                        backgroundColor: 'rgba(118, 183, 178, 0.2)',
+                        borderColor: '#76b7b2',
+                        pointBackgroundColor: '#76b7b2',
+                        pointRadius: 0,
+                        borderDash: [5, 5]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#e0e1dd'
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                stepSize: 20
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e0e1dd'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+  <script>
+        // DOM元素
+        const fileInput = document.getElementById('fileInput');
+        const uploadArea = document.getElementById('uploadArea');
+        const imagePreview = document.getElementById('imagePreview');
+        const identifyBtn = document.getElementById('identifyBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const spinner = document.getElementById('spinner');
+        const resultContainer = document.getElementById('resultContainer');
+        const resultCategory = document.getElementById('resultCategory');
+
+        // 上传区域点击事件
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // 文件选择变化
+        fileInput.addEventListener('change', function(e) {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+
+                    // 添加active类并隐藏上传提示
+                    uploadArea.classList.add('active');
+                    uploadArea.querySelector('.upload-text').style.display = 'none';
+                    uploadArea.querySelector('.upload-btn').style.display = 'none';
+                    uploadArea.querySelector('i').style.display = 'none';
+
+                    // 启用识别按钮
+                    identifyBtn.disabled = false;
+                }
+
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        // 识别按钮点击事件
+        identifyBtn.addEventListener('click', function() {
+            // 显示加载动画
+            spinner.style.display = 'block';
+
+            // 模拟识别过程
+            setTimeout(() => {
+                // 隐藏加载动画
+                spinner.style.display = 'none';
+
+                // 显示结果
+                resultContainer.style.display = 'block';
+
+                // 从预设采矿类别中随机选择一个作为结果
+                const miningCategories = [
+                    '挖掘机', '矿车', '钻机', '爆破设备',
+                    '传送带系统', '装载机', '凿岩台车',
+                    '提升机', '通风设备', '矿山岩石'
+                ];
+
+                const randomCategory = miningCategories[Math.floor(Math.random() * miningCategories.length)];
+                resultCategory.textContent = randomCategory;
+
+                // 滚动到结果位置
+                resultContainer.scrollIntoView({behavior: 'smooth'});
+            }, 1500);
+        });
+
+        // 重置按钮点击事件
+        resetBtn.addEventListener('click', function() {
+            // 重置所有元素
+            fileInput.value = '';
+            imagePreview.src = '';
+            imagePreview.style.display = 'none';
+            resultContainer.style.display = 'none';
+            spinner.style.display = 'none';
+            identifyBtn.disabled = true;
+
+            // 恢复上传区域原始状态
+            uploadArea.classList.remove('active');
+            uploadArea.querySelector('.upload-text').style.display = 'block';
+            uploadArea.querySelector('.upload-btn').style.display = 'block';
+            uploadArea.querySelector('i').style.display = 'block';
+        });
+
+        // 文件拖放功能
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('active');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('active');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('active');
+
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                fileInput.files = e.dataTransfer.files;
+                const changeEvent = new Event('change', { bubbles: true });
+                fileInput.dispatchEvent(changeEvent);
+            }
+        });
+    </script>
+</body>
+</html>

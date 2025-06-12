@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>溶液采矿技术 | 绿色高效的矿物提取方案</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0d2438;
+            --primary: #0f395c;
+            --secondary: #1867a9;
+            --accent: #d6f0ff;
+            --highlight: #00c0e5;
+            --solution-blue: #4dabf5;
+            --copper: #b96933;
+            --uranium: #5cd158;
+            --gold: #ffd700;
+            --chemical: #bd93f9;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--accent);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: rgba(13, 36, 56, 0.95);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.8rem;
+            color: var(--highlight);
+        }
+
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.15rem;
+            padding: 8px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+        }
+
+        /* 英雄区域 */
+        .solution-hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at center, rgba(0, 192, 229, 0.1) 0%, transparent 70%),
+                linear-gradient(rgba(13, 36, 56, 0.9), rgba(13, 36, 56, 0.95)),
+                url('https://images.unsplash.com/photo-1624398514063-4a6d8c6e3c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            line-height: 1.15;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.4);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            color: #b6e5ff;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 25px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--highlight);
+            color: var(--primary-dark);
+            padding: 16px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 192, 229, 0.4);
+        }
+
+        .btn:hover {
+            background: #00d0f5;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 192, 229, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--highlight);
+            color: var(--accent);
+            box-shadow: 0 4px 10px rgba(0, 192, 229, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 192, 229, 0.1);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* 内容区域 */
+        .section {
+            padding: 110px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 90px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: var(--highlight);
+            border-radius: 3px;
+        }
+
+        .section-title p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 35px auto 0;
+            color: #a0d7ff;
+        }
+
+        /* 技术原理部分 */
+        .solution-process {
+            background: rgba(15, 57, 92, 0.85);
+        }
+
+        .process-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .process-steps {
+            flex: 1;
+            min-width: 500px;
+            background: rgba(24, 103, 169, 0.6);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .process-steps h3 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+
+        .step {
+            margin-bottom: 35px;
+            padding-left: 30px;
+            border-left: 3px solid var(--solution-blue);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            left: -25px;
+            top: 0;
+            width: 45px;
+            height: 45px;
+            background: var(--solution-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 10px rgba(77, 171, 245, 0.4);
+        }
+
+        .step h4 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #b6e5ff;
+            line-height: 1.8;
+        }
+
+        .process-visual {
+            flex: 1;
+            min-width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .process-diagram {
+            width: 100%;
+            height: 600px;
+            background: url('https://images.unsplash.com/photo-1575503437844-44634502f836?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') no-repeat center center/contain;
+            position: relative;
+        }
+
+        /* 应用领域 */
+        .applications-section {
+            background: linear-gradient(to bottom, rgba(15, 57, 92, 0.9), rgba(13, 36, 56, 0.9));
+        }
+
+        .minerals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .mineral-card {
+            background: rgba(24, 103, 169, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            border-bottom: 4px solid var(--solution-blue);
+        }
+
+        .mineral-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .mineral-header {
+            padding: 30px 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mineral-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .mineral-card.copper .mineral-icon { color: var(--copper); }
+        .mineral-card.uranium .mineral-icon { color: var(--uranium); }
+        .mineral-card.gold .mineral-icon { color: var(--gold); }
+        .mineral-card.lithium .mineral-icon { color: #bd93f9; }
+
+        .mineral-card h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .mineral-content {
+            padding: 25px;
+        }
+
+        .mineral-content ul {
+            list-style: none;
+        }
+
+        .mineral-content li {
+            padding: 15px 0;
+            position: relative;
+            padding-left: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mineral-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--solution-blue);
+            font-weight: bold;
+        }
+
+        .mineral-content li:last-child {
+            border-bottom: none;
+        }
+
+        /* 优势对比 */
+        .advantages-section {
+            background: linear-gradient(135deg, #0d3452, #0b4265);
+        }
+
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            margin-top: 60px;
+        }
+
+        .advantage-card {
+            background: rgba(24, 103, 169, 0.4);
+            border-radius: 15px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--highlight);
+        }
+
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--highlight);
+        }
+
+        .advantage-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .advantage-icon {
+            font-size: 2.2rem;
+            color: var(--highlight);
+        }
+
+        .advantage-card p {
+            color: #b6e5ff;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .stats-container {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(13, 36, 56, 0.6);
+            border-radius: 10px;
+        }
+
+        .stats-container canvas {
+            width: 100%;
+            height: 200px;
+        }
+
+        /* 数据图表区域 */
+        .data-section {
+            background: rgba(15, 57, 92, 0.85);
+        }
+
+        .chart-container {
+            background: rgba(24, 103, 169, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin: 30px 0;
+        }
+
+        .chart-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .chart-header h3 {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        canvas {
+            max-height: 400px;
+            margin: 0 auto;
+        }
+
+        /* 页脚 */
+        footer {
+            background: rgba(8, 27, 44, 0.95);
+            padding: 90px 0 40px;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--highlight), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--highlight);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #8da9c7;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--highlight);
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info i {
+            font-size: 1.3rem;
+            color: var(--solution-blue);
+            min-width: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(24, 103, 169, 0.6);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s ease;
+            font-size: 1.4rem;
+        }
+
+        .social-links a:hover {
+            background: var(--highlight);
+            color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6e8eaf;
+            font-size: 0.95rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1100px) {
+            .process-container {
+                flex-direction: column;
+            }
+
+            .process-steps,
+            .process-visual {
+                min-width: 100%;
+            }
+
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 0;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .process-steps,
+            .process-visual {
+                min-width: 100%;
+            }
+
+            .process-diagram {
+                height: 400px;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-flask logo-icon"></i>
+                <h1>溶液采矿技术</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">技术原理</a></li>
+                    <li><a href="#">应用领域</a></li>
+                    <li><a href="#">工艺优势</a></li>
+                    <li><a href="#">数据案例</a></li>
+                    <li><a href="#">环境管理</a></li>
+                    <li><a href="#">资源中心</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="solution-hero">
+        <div class="container hero-content">
+            <h1>溶液采矿：地下资源的绿色提取方案</h1>
+            <p>溶液采矿（浸出采矿）是一种通过化学溶液溶解并提取目标矿物的先进技术，适用于传统开采方式难以处理的低品位矿床。具有环保、高效、安全的特点。</p>
+            <div class="hero-buttons">
+                <a href="#process" class="btn"><i class="fas fa-vial"></i> 了解技术原理</a>
+                <a href="#applications" class="btn-outline"><i class="fas fa-chart-bar"></i> 查看应用数据</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术原理部分 -->
+    <section class="section solution-process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>溶液采矿技术原理</h2>
+                <p>化学溶解与矿物提取的科学方法</p>
+            </div>
+
+            <div class="process-container">
+                <div class="process-steps">
+                    <h3>溶液采矿四步流程</h3>
+
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>钻孔布置</h4>
+                        <p>钻凿一系列注入井和回收井，构建地下溶液循环系统。注入井布设间距根据矿体渗透性决定，通常为30-60米。</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>溶液注入</h4>
+                        <p>使用专用泵站将化学溶剂（如稀硫酸或氰化物溶液）注入矿体。不同矿物的优化浓度（铜矿：5-20g/L H₂SO₄）。</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>矿质溶解</h4>
+                        <p>化学溶液渗透过矿岩裂隙网络，溶解目标金属（铜、铀、金等）。溶解周期从数月到数年不等，取决矿体规模和品位。</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>富液回收与处理</h4>
+                        <p>富含金属的溶液抽回地表，通过萃取-电积工艺（SX-EW）回收金属。铜回收率可达80-90%，金矿使用碳吸附回收法。</p>
+                    </div>
+                </div>
+
+                <div class="process-visual">
+                    <div class="process-diagram"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用领域 -->
+    <section class="section applications-section" id="applications">
+        <div class="container">
+            <div class="section-title">
+                <h2>主要应用领域</h2>
+                <p>适用于多种金属矿物的高效提取</p>
+            </div>
+
+            <div class="minerals-grid">
+                <div class="mineral-card copper">
+                    <div class="mineral-header">
+                        <div class="mineral-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3>铜矿浸出</h3>
+                    </div>
+                    <div class="mineral-content">
+                        <ul>
+                            <li>全球80%的铜矿采用浸出-萃取-电积工艺</li>
+                            <li>适用矿石：氧化铜矿、次生硫化矿</li>
+                            <li>常用溶剂：稀硫酸溶液（10-30g/L）</li>
+                            <li>回收率：75-90%</li>
+                            <li>代表项目：智利Escondida铜矿浸出厂</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mineral-card uranium">
+                    <div class="mineral-header">
+                        <div class="mineral-icon">
+                            <i class="fas fa-radiation"></i>
+                        </div>
+                        <h3>铀矿开采</h3>
+                    </div>
+                    <div class="mineral-content">
+                        <ul>
+                            <li>地浸法提取技术主导铀矿生产</li>
+                            <li>适用矿床：砂岩型铀矿床</li>
+                            <li>常用溶剂：碳酸盐溶液或稀硫酸</li>
+                            <li>回收率：70-85%</li>
+                            <li>代表项目：哈萨克斯坦Inkai铀矿</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mineral-card gold">
+                    <div class="mineral-header">
+                        <div class="mineral-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3>金矿提取</h3>
+                    </div>
+                    <div class="mineral-content">
+                        <ul>
+                            <li>适用于低品位难选金矿石</li>
+                            <li>溶剂：稀氰化钠溶液（0.05-0.1%）</li>
+                            <li>回收方法：活性炭吸附或锌置换</li>
+                            <li>回收率：60-85%</li>
+                            <li>代表项目：美国Goldstrike金矿</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mineral-card lithium">
+                    <div class="mineral-header">
+                        <div class="mineral-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>锂资源开发</h3>
+                    </div>
+                    <div class="mineral-content">
+                        <ul>
+                            <li>新型溶液法提锂技术</li>
+                            <li>溶剂：选择性吸附剂或膜分离</li>
+                            <li>回收率：70-90%</li>
+                            <li>低环境影响，高经济价值</li>
+                            <li>代表项目：澳大利亚Holland锂矿</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 优势对比 -->
+    <section class="section advantages-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>技术优势分析</h2>
+                <p>环保、经济与安全性能对比</p>
+            </div>
+
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <h3><i class="fas fa-leaf advantage-icon"></i> 环保优势</h3>
+                    <p>地表扰动最小化，减少90%以上的废石产出，无地下坑道或露天矿坑形成，显著降低生态足迹。</p>
+
+                    <div class="stats-container">
+                        <canvas id="ecoChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="advantage-card">
+                    <h3><i class="fas fa-euro-sign advantage-icon"></i> 经济效益</h3>
+                    <p>运营成本仅为传统采矿的30-50%，低品位资源利用率提高3-5倍，资本投入减少40-70%。</p>
+
+                    <div class="stats-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="advantage-card">
+                    <h3><i class="fas fa-user-helmet-safety advantage-icon"></i> 安全优势</h3>
+                    <p>消除地下作业风险，机械事故降低95%，粉尘危害减少99%，符合最高安全标准。</p>
+
+                    <div class="stats-container">
+                        <canvas id="safetyChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="advantage-card">
+                    <h3><i class="fas fa-chart-line advantage-icon"></i> 生产效率</h3>
+                    <p>资源回收周期缩短40%，自动化程度高，可连续作业。单位面积产量提升50-300%。</p>
+
+                    <div class="stats-container">
+                        <canvas id="prodChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据图表区域 -->
+    <section class="section data-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>行业数据统计</h2>
+                <p>全球溶液采矿技术发展与产量趋势</p>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>全球溶液采矿金属产量比例（2023年）</h3>
+                    <p>主要金属在溶液采矿中的产量占比</p>
+                </div>
+                <canvas id="productionChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>全球铜产量来源分布</h3>
+                    <p>不同生产方式的铜产量占比</p>
+                </div>
+                <canvas id="copperChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>溶液采矿技术</h3>
+                    <p>推动绿色矿物提取技术创新，实现矿产资源开发与生态环境和谐发展，创造可持续矿业未来。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>技术资源</h3>
+                    <a href="#">浸出工艺手册</a>
+                    <a href="#">溶剂化学指南</a>
+                    <a href="#">监测控制系统</a>
+                    <a href="#">闭矿复垦方案</a>
+                    <a href="#">安全操作规范</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>全球项目</h3>
+                    <a href="#">智利Escondida铜矿</a>
+                    <a href="#">美国Morenci铜矿</a>
+                    <a href="#">哈萨克斯坦Inkai铀矿</a>
+                    <a href="#">澳大利亚Olympic Dam</a>
+                    <a href="#">秘鲁Toromocho铜矿</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <div class="contact-info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>北京市朝阳区化工技术园区88号</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <span>+86 10 8765 4321</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@solution-mining.org</span>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-users"></i>
+                        <span>溶液采矿技术创新联盟</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 溶液采矿技术平台. 保留所有权利 | 京ICP备2023000000号</p>
+                <p style="margin-top: 15px">绿色矿产提取国家工程中心</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 图表初始化函数
+        function initCharts() {
+            // 生态优势图表
+            const ecoCtx = document.getElementById('ecoChart').getContext('2d');
+            new Chart(ecoCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['废石产生量', '能源消耗', '水资源使用', '地表扰动'],
+                    datasets: [{
+                        label: '传统采矿',
+                        data: [100, 100, 100, 100],
+                        backgroundColor: 'rgba(189, 195, 199, 0.6)',
+                        borderColor: 'rgba(189, 195, 199, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: '溶液采矿',
+                        data: [12, 35, 65, 18],
+                        backgroundColor: 'rgba(77, 171, 245, 0.7)',
+                        borderColor: 'rgba(77, 171, 245, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#d6f0ff'
+                            },
+                            title: {
+                                display: true,
+                                text: '百分比 (%)',
+                                color: '#b6e5ff'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 生产成本对比
+            const costCtx = document.getElementById('costChart').getContext('2d');
+            new Chart(costCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['设备投资', '能源成本', '人力成本', '环保处理'],
+                    datasets: [{
+                        data: [30, 25, 35, 10],
+                        backgroundColor: [
+                            'rgba(77, 171, 245, 0.7)',
+                            'rgba(0, 192, 229, 0.7)',
+                            'rgba(13, 202, 240, 0.7)',
+                            'rgba(106, 226, 245, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 安全性能图表
+            const safetyCtx = document.getElementById('safetyChart').getContext('2d');
+            new Chart(safetyCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['机械伤害', '岩爆风险', '粉尘危害', '地下坍塌', '化学危害'],
+                    datasets: [{
+                        label: '传统采矿',
+                        data: [90, 80, 85, 75, 30],
+                        backgroundColor: 'rgba(189, 195, 199, 0.2)',
+                        borderColor: 'rgba(189, 195, 199, 1)',
+                        borderWidth: 1,
+                        pointBackgroundColor: 'rgba(189, 195, 199, 1)'
+                    }, {
+                        label: '溶液采矿',
+                        data: [5, 0, 1, 0, 60],
+                        backgroundColor: 'rgba(77, 171, 245, 0.2)',
+                        borderColor: 'rgba(77, 171, 245, 1)',
+                        borderWidth: 1,
+                        pointBackgroundColor: 'rgba(77, 171, 245, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        r: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: '#d6f0ff'
+                            }
+                    }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 生产产量图表
+            const prodCtx = document.getElementById('prodChart').getContext('2d');
+            new Chart(prodCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+                    datasets: [{
+                        label: '铜产量',
+                        data: [3.2, 3.8, 4.1, 4.5, 5.0, 5.6],
+                        borderColor: 'rgba(185, 105, 51, 1)',
+                        backgroundColor: 'rgba(185, 105, 51, 0.1)',
+                        tension: 0.3
+                    }, {
+                        label: '铀产量',
+                        data: [0.8, 1.1, 1.4, 1.7, 2.1, 2.5],
+                        borderColor: 'rgba(92, 209, 88, 1)',
+                        backgroundColor: 'rgba(92, 209, 88, 0.1)',
+                        tension: 0.3
+                    }, {
+                        label: '金产量',
+                        data: [0.25, 0.31, 0.36, 0.42, 0.48, 0.55],
+                        borderColor: 'rgba(255, 215, 0, 1)',
+                        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#d6f0ff'
+                            },
+                            title: {
+                                display: true,
+                                text: '百万吨',
+                                color: '#b6e5ff'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 全球溶液采矿金属产量比例
+            const prodPieCtx = document.getElementById('productionChart').getContext('2d');
+            new Chart(prodPieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['铜', '铀', '金', '镍', '锌', '其他'],
+                    datasets: [{
+                        data: [68, 23, 6, 1.5, 0.5, 1],
+                        backgroundColor: [
+                            'rgba(185, 105, 51, 0.7)',
+                            'rgba(92, 209, 88, 0.7)',
+                            'rgba(255, 215, 0, 0.7)',
+                            'rgba(77, 171, 245, 0.7)',
+                            'rgba(106, 226, 245, 0.7)',
+                            'rgba(189, 147, 249, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 铜产量来源分布
+            const copperCtx = document.getElementById('copperChart').getContext('2d');
+            new Chart(copperCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['溶液采矿(SX-EW)', '露天开采', '地下开采'],
+                    datasets: [{
+                        data: [48, 42, 10],
+                        backgroundColor: [
+                            'rgba(77, 171, 245, 0.7)',
+                            'rgba(185, 105, 51, 0.7)',
+                            'rgba(92, 209, 88, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#d6f0ff'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.step, .mineral-card, .advantage-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedItems.forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(item);
+            });
+
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(13, 36, 56, 0.98)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                } else {
+                    header.style.background = 'rgba(13, 36, 56, 0.95)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                }
+            });
+
+            // 初始化图表
+            initCharts();
+        });
+    </script>
+</body>
+</html>

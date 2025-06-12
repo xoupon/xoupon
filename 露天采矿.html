@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>露天采矿技术 | 现代矿业的核心</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-dark: #1a2a38;
+            --primary: #2c3e50;
+            --secondary: #415a77;
+            --accent: #e6e8e6;
+            --highlight: #ff9e00;
+            --earth: #8d6e63;
+            --copper: #b87333;
+            --coal: #36454F;
+            --machinery: #7d8c9e;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            background: rgba(26, 42, 56, 0.95);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--highlight);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            background: var(--copper);
+            color: white;
+        }
+
+        /* 英雄区域 */
+        .opencast-hero {
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opencast-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(26, 42, 56, 0.7), rgba(26, 42, 56, 0.9)),
+                        url('https://images.unsplash.com/photo-1591485912593-72b8d0c60c7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') no-repeat center center/cover;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #e6e8e6;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--copper);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn:hover {
+            background: var(--highlight);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--copper);
+            color: var(--accent);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--highlight);
+        }
+
+        /* 内容区域 */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            display: inline-block;
+            background: linear-gradient(to right, var(--accent), var(--highlight));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 6px;
+            background: var(--highlight);
+            border-radius: 3px;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #b5c0d0;
+        }
+
+        /* 露天采矿过程 */
+        .mining-process {
+            background: rgba(28, 42, 56, 0.8);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .process-card {
+            background: rgba(44, 62, 80, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            border-top: 6px solid var(--earth);
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .process-image {
+            height: 220px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .process-content {
+            padding: 30px;
+        }
+
+        .process-icon {
+            font-size: 2.5rem;
+            color: var(--highlight);
+            margin-bottom: 20px;
+        }
+
+        .process-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .process-card p {
+            color: #b5c0d0;
+            margin-bottom: 20px;
+        }
+
+        /* 采矿设备展示 */
+        .mining-equipment {
+            background: rgba(28, 42, 56, 0.9);
+        }
+
+        .equipment-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .equipment-card {
+            background: rgba(44, 62, 80, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .equipment-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .equipment-icon {
+            font-size: 3rem;
+            color: var(--highlight);
+            margin-right: 20px;
+        }
+
+        .equipment-card h3 {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .equipment-specs {
+            margin: 25px 0;
+            padding: 25px;
+            background: rgba(26, 42, 56, 0.5);
+            border-radius: 10px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-name {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* 技术优势 */
+        .technical-section {
+            background: linear-gradient(135deg, #203040, #2d455d);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .tech-card {
+            background: rgba(44, 62, 80, 0.7);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--highlight);
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--highlight);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .tech-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tech-card p {
+            color: #b5c0d0;
+            line-height: 1.8;
+        }
+
+        /* 页脚 */
+        footer {
+            background: rgba(26, 42, 56, 0.95);
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--highlight);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #a0aec0;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--highlight);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--secondary);
+            border-radius: 50%;
+            color: var(--accent);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: var(--highlight);
+            color: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-mountain logo-icon"></i>
+                <h1>露天采矿技术</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="javascript:void(0)" class="active">首页</a></li>
+                    <li><a href="javascript:void(0)">采矿工艺</a></li>
+                    <li><a href="javascript:void(0)">设备技术</a></li>
+                    <li><a href="javascript:void(0)">环境治理</a></li>
+                    <li><a href="javascript:void(0)">案例研究</a></li>
+                    <li><a href="javascript:void(0)">行业动态</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="opencast-hero">
+        <div class="container hero-content">
+            <h1>露天采矿：现代矿业的核心技术</h1>
+            <p>露天采矿是最具效率的矿产开发方式，占全球矿产总量70%以上。通过先进的爆破、运输和治理技术，露天矿能够高效、安全地获取地壳资源。</p>
+            <div class="hero-buttons">
+                <a href="#process" class="btn"><i class="fas fa-gears"></i> 了解采矿工艺</a>
+                <a href="#equipment" class="btn-outline"><i class="fas fa-truck-pickup"></i> 查看重型设备</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 露天采矿过程 -->
+    <section class="section mining-process" id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>露天采矿流程</h2>
+                <p>从地表剥离到矿产采出的标准化作业流程</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="process-image" style="background-image: url('https://images.unsplash.com/photo-1591901075116-9ac87c59e9fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="process-content">
+                        <div class="process-icon">
+                            <i class="fas fa-mountain-sun"></i>
+                        </div>
+                        <h3>地表剥离</h3>
+                        <p>移除非矿覆盖层，使用大型推土机和电铲清除表层土壤和岩石，建立矿坑作业面。</p>
+                    </div>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-image" style="background-image: url('https://images.unsplash.com/photo-1552465011-bf9299aed63d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="process-content">
+                        <div class="process-icon">
+                            <i class="fas fa-explosion"></i>
+                        </div>
+                        <h3>爆破作业</h3>
+                        <p>使用精密钻孔爆破技术破碎岩层，通过GPS测量优化孔网参数，控制爆破效果。</p>
+                    </div>
+                </div>
+
+                <div class="process-card">
+                    <div class="process-image" style="background-image: url('https://images.unsplash.com/photo-1639751974860-8f0e2d30c7d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="process-content">
+                        <div class="process-icon">
+                            <i class="fas fa-truck-ramp-box"></i>
+                        </div>
+                        <h3>装载运输</h3>
+                        <p>大型挖掘机将矿石装载至运输车辆，200-400吨矿卡将矿石运往破碎站或堆场。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 采矿设备展示 -->
+    <section class="section mining-equipment" id="equipment">
+        <div class="container">
+            <div class="section-title">
+                <h2>矿山巨人：重型采矿设备</h2>
+                <p>现代露天矿高效作业的核心装备</p>
+            </div>
+
+            <div class="equipment-container">
+                <div class="equipment-card">
+                    <div class="equipment-header">
+                        <div class="equipment-icon">
+                            <i class="fas fa-shovel"></i>
+                        </div>
+                        <h3>液压挖掘机</h3>
+                    </div>
+                    <p>露天矿的核心挖掘设备，工作能力20-120立方米。配备GPS精确定位系统，可实现精确挖掘和自动作业路径规划。</p>
+
+                    <div class="equipment-specs">
+                        <div class="spec-item">
+                            <span class="spec-name">最大斗容</span>
+                            <span>85 m³</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">发动机功率</span>
+                            <span>4500 hp</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">工作重量</span>
+                            <span>900-1200 t</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">工作半径</span>
+                            <span>25-30 m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="equipment-card">
+                    <div class="equipment-header">
+                        <div class="equipment-icon">
+                            <i class="fas fa-truck-monster"></i>
+                        </div>
+                        <h3>矿山运输卡车</h3>
+                    </div>
+                    <p>露天矿的矿石运输主力，载重量达400吨。采用混合动力或电力驱动技术，配备自动驾驶系统和安全防撞装置。</p>
+
+                    <div class="equipment-specs">
+                        <div class="spec-item">
+                            <span class="spec-name">最大载重</span>
+                            <span>360-400 t</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">发动机功率</span>
+                            <span>3000-3750 hp</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">最高速度</span>
+                            <span>60-65 km/h</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-name">载货容积</span>
+                            <span>220-250 m³</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术优势 -->
+    <section class="section technical-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>露天采矿技术优势</h2>
+                <p>效率、安全与可持续发展的完美结合</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3><i class="fas fa-rocket"></i> 高效开采</h3>
+                    <p>露天采矿可达到更高的开采率（90%以上），是井下采矿生产率的2-5倍，特别适用于大型矿床的开采。</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3><i class="fas fa-safety-vest"></i> 安全作业</h3>
+                    <p>相比井下开采，露天作业风险降低75%以上，通过智能监控系统实现人员与设备的实时安全保障。</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3><i class="fas fa-leaf"></i> 环境可控</h3>
+                    <p>从开采初期的环境评估到闭矿后的复垦治理，全周期环境管理体系保障矿区生态恢复率达到国际标准。</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3><i class="fas fa-robot"></i> 自动化程度高</h3>
+                    <p>自动驾驶矿卡、远程操控挖掘设备、无人机矿区测绘等技术在露天矿广泛应用，大幅提升生产效率和安全性。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>露天采矿技术</h3>
+                    <p>全球领先的露天采矿技术平台，提供全面的技术资料、设备信息和行业趋势分析，推动矿业可持续发展。</p>
+                    <div class="social-links">
+                        <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>资源导航</h3>
+                    <a href="javascript:void(0)">露天采矿指南</a>
+                    <a href="javascript:void(0)">设备数据库</a>
+                    <a href="javascript:void(0)">矿业软件</a>
+                    <a href="javascript:void(0)">安全规范</a>
+                    <a href="javascript:void(0)">环境标准</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>全球矿区</h3>
+                    <a href="javascript:void(0)">智利埃斯孔迪达铜矿</a>
+                    <a href="javascript:void(0)">澳大利亚皮尔巴拉铁矿</a>
+                    <a href="javascript:void(0)">美国宾汉峡谷矿</a>
+                    <a href="javascript:void(0)">蒙古奥尤陶勒盖金铜矿</a>
+                    <a href="javascript:void(0)">南非金田金矿</a>
+                </div>
+
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 北京市朝阳区矿冶路88号</p>
+                    <p><i class="fas fa-phone"></i> +86 10 6789 1234</p>
+                    <p><i class="fas fa-envelope"></i> info@opencastmining.org</p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 露天采矿技术平台. 保留所有权利 | 京ICP备2023000000号</p>
+                <p style="margin-top: 10px">矿业工程科技创新中心</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedItems = document.querySelectorAll('.process-card, .tech-card, .equipment-card');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedItems.forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(item);
+            });
+
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(26, 42, 56, 0.98)';
+                    header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.4)';
+                } else {
+                    header.style.background = 'rgba(26, 42, 56, 0.95)';
+                    header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
